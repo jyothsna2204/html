@@ -1,1 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            background: #e26358;
+            background: linear-gradient(135deg, #f15e54, #d779e6);
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 110vh;
+        }
 
+        .container {
+            text-align: center;
+            width: 350px;
+        }
+
+        h1 {
+            color: #000000;
+        }
+        .todolist {
+            width: 100%;
+        }
+
+        .test {
+            margin: 10px 0;
+            padding: 10px;
+            background: linear-gradient(135deg, #d4f185, #a0d8a6);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove-button {
+            margin-left: 10px;
+            padding: 2px 5px;
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: calc(100% - 22px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Todo List</h1>
+        <input type="text" id="event" placeholder="Enter event">
+        <button onclick="adding()">Add</button>
+        <div class="todolist">
+            
+        </div>
+    </div>
+
+    <script>
+        let adding = () => {
+            var event = document.getElementById("event").value;
+            var newItem = document.createElement("div");
+            newItem.className = "test";
+            newItem.style.background = "linear-gradient(135deg, #d4f185, #a0d8a6)";
+
+            var revb = document.createElement("button");
+            revb.textContent = "remove";
+            revb.className = "remove-button";
+            revb.addEventListener("click", function () {
+                newItem.remove();
+            });
+
+            newItem.textContent = event;
+            newItem.appendChild(revb);
+            var list = document.querySelector(".todolist");
+            list.appendChild(newItem);
+        }
+
+        // If there are any existing items with class 'test' and they have a remove button, attach the remove event listener
+        var items = document.querySelectorAll('.test');
+        items.forEach(function (item) {
+            var removeButton = item.querySelector('.remove-button');
+            if (removeButton) {
+                removeButton.addEventListener("click", function () {
+                    item.remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
